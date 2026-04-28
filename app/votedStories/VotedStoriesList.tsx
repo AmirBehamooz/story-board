@@ -13,16 +13,13 @@ export default function VotedStoriesList({
   const [votedStories, setVotedStories] = useState(initialUserVotedStories);
 
   async function unVoteStory(storyId: string) {
-    const response = await fetch(
-      "http://localhost:3000/api/users/666/votedStories",
-      {
-        method: "DELETE",
-        body: JSON.stringify({ storyId }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch("/api/users/666/votedStories", {
+      method: "DELETE",
+      body: JSON.stringify({ storyId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const updatedVotedStories = await response.json();
     setVotedStories(updatedVotedStories);
