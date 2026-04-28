@@ -7,13 +7,11 @@ interface Params {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<Params> }
 ) {
+
   const { db } = await connectToDB();
-
-  const urlParams = await params;
-  const storyId = urlParams.id;
-
+  const { id: storyId } = await params;
   const story = await db.collection("my-stories").findOne({ id: storyId });
 
   if (!story) {

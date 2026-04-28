@@ -1,12 +1,21 @@
 import StoriesList from "./StoriesList";
+import { headers } from "next/headers";
 
 export default async function StoriesPage() {
-  const response = await fetch("http://localhost:3000/api/stories");
+  const headersList = await headers();
+  const host = headersList.get("host");
+
+  const baseUrl = `http://${host}`;
+
+  const response = await fetch(`${baseUrl}/api/stories`, {
+    cache: "no-store",
+  });
+
   const stories = await response.json();
 
   const votedResponse = await fetch(
-    "http://localhost:3000/api/users/666/votedStories",
-    { cache: "no-cache" }
+    `${baseUrl}/api/users/666/votedStories`,
+    { cache: "no-store" }
   );
 
   const votedStories = await votedResponse.json();
