@@ -5,7 +5,8 @@ export default async function VotedStoriesPage() {
   const headersList = await headers();
   const host = headersList.get("host");
 
-  const baseUrl = `http://${host}`;
+  const protocol = host?.includes("localhost") ? "http" : "https";
+  const baseUrl = `${protocol}://${host}`;
 
   const response = await fetch(
     `${baseUrl}/api/users/666/votedStories`,
