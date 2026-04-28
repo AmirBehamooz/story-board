@@ -15,16 +15,13 @@ export default function StoriesList({
   const [votedStories, setVotedStories] = useState(initialVotedStories);
 
   async function voteStory(storyId: string) {
-    const response = await fetch(
-      "http://localhost:3000/api/users/666/votedStories",
-      {
-        method: "POST",
-        body: JSON.stringify({ storyId }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch("/api/users/666/votedStories", {
+      method: "POST",
+      body: JSON.stringify({ storyId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const updatedVotedStories = await response.json();
     setVotedStories(updatedVotedStories);
@@ -35,16 +32,13 @@ export default function StoriesList({
   }
 
   async function unVoteStory(storyId: string) {
-    const response = await fetch(
-      "http://localhost:3000/api/users/666/votedStories",
-      {
-        method: "DELETE",
-        body: JSON.stringify({ storyId }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch("/api/users/666/votedStories", {
+      method: "DELETE",
+      body: JSON.stringify({ storyId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const updatedVotedStories = await response.json();
     setVotedStories(updatedVotedStories);
@@ -63,6 +57,7 @@ export default function StoriesList({
                 className="object-contain"
               />
             </figure>
+
             <h2 className="text-xl font-bold">{story.name}</h2>
 
             {storyIsVoted(story.id) ? (

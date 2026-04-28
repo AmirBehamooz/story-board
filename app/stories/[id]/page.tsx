@@ -1,18 +1,27 @@
 import NotFoundPage from "@/app/not-found";
 import Image from "next/image";
+import { headers } from "next/headers";
 
 export default async function StoryDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const response = await fetch("http://localhost:3000/api/stories/" + id);
-  const story = await response.json();
 
-  if (!story) {
+  const headersList = await headers();
+  const host = headersList.get("host");
+  const baseUrl = `http://${host}`;
+
+  const response = await fetch(`${baseUrl}/api/stories/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
     return <NotFoundPage />;
   }
+
+  const story = await response.json();
 
   return (
     <section className="px-8 py-6 flex flex-col gap-12">
