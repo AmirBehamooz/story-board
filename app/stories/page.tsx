@@ -12,12 +12,19 @@ export default async function StoriesPage() {
     cache: "no-store",
   });
 
+  if (!response.ok) {
+    return <div>Failed to load stories</div>;
+  }
+
   const stories = await response.json();
 
-  const votedResponse = await fetch(
-    `${baseUrl}/api/users/666/votedStories`,
-    { cache: "no-store" }
-  );
+  const votedResponse = await fetch(`${baseUrl}/api/users/666/votedStories`, {
+    cache: "no-store",
+  });
+
+  if (!votedResponse.ok) {
+    return <div>Failed to load voted stories</div>;
+  }
 
   const votedStories = await votedResponse.json();
 
