@@ -6,25 +6,12 @@ interface Params {
   id: string;
 }
 
-// type VotedStories = Record<string, string[]>;
-
-// const votedStories: VotedStories = {
-//   111: ["1", "3", "5"],
-//   222: ["2", "4", "6"],
-//   333: ["8", "10", "12"],
-//   444: ["7", "13", "11"],
-//   555: ["9", "15", "14"],
-// };
-
 export async function GET(
   request: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<Params> }
 ) {
   const { db } = await connectToDB();
-
-  const urlParams = await params;
-  const userId = urlParams.id;
-  // const userVotedStoryIds = votedStories[userId];
+  const { id: userId } = await params;
 
   const userVotes = await db
     .collection("user-voted-stories")
@@ -60,12 +47,10 @@ interface VoteBody {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<Params> }
 ) {
   const { db } = await connectToDB();
-
-  const urlParams = await params;
-  const userId = urlParams.id;
+  const { id: userId } = await params;
 
   const body: VoteBody = await request.json();
   const storyId = body.storyId;
@@ -98,12 +83,10 @@ interface VotedStoryCollection {
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Params }
+  { params }: { params: Promise<Params> }
 ) {
   const { db } = await connectToDB();
-
-  const urlParams = await params;
-  const userId = urlParams.id;
+  const { id: userId } = await params;
 
   const body: VoteBody = await request.json();
   const storyId = body.storyId;
