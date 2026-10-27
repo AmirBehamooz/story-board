@@ -36,7 +36,7 @@ export default async function StoryDetailsPage({
 
   return (
     <section className="px-8 py-6 flex flex-col gap-12">
-      <h1 className="font-bold text-6xl text-white">{story.name}</h1>
+      <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl text-white">{story.name}</h1>
 
       <div className="grid gap-6 md:grid-cols-2">
         <figure className="relative w-full aspect-[16/9]">

@@ -29,8 +29,8 @@ export default async function StoriesPage() {
   const votedStories = await votedResponse.json();
 
   return (
-    <main className="px-8 py-6 flex flex-col gap-12">
-      <h1 className="font-bold text-6xl text-white">Stories</h1>
+    <main className="px-4 sm:px-8 py-6 flex flex-col gap-12">
+      <h1 className="font-bold text-3xl md:text-5xl lg:text-6xl text-white">Stories</h1>
       <StoriesList stories={stories} initialVotedStories={votedStories} />
     </main>
   );
