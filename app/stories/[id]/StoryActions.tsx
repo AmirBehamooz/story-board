@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function StoryActions({
@@ -10,6 +10,7 @@ export default function StoryActions({
   storyId: string;
   initialIsVoted: boolean;
 }) {
+  const router = useRouter();
   const [isVoted, setIsVoted] = useState(initialIsVoted);
 
   async function voteStory() {
@@ -32,12 +33,12 @@ export default function StoryActions({
 
   return (
     <div className="flex gap-4 flex-wrap">
-      <Link
-        href="/stories"
+      <button
+        onClick={() => router.back()}
         className="p-2 px-6 border border-quaternary rounded-sm shadow-xl/20 shadow-quaternary"
       >
-        ← Back to Stories
-      </Link>
+        ← Back
+      </button>
       {isVoted ? (
         <button
           className="p-2 px-6 border border-quaternary rounded-sm bg-quaternary text-primary"
