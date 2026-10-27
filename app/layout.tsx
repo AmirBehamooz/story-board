@@ -16,7 +16,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NavBar />
-        {children}
+        <main className="min-h-[calc(100vh-120px)]">{children}</main>
+        <footer className="py-4 text-center text-sm text-white/50">
+          Designed by Amir Behamooz
+        </footer>
       </body>
     </html>
   );
