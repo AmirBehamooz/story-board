@@ -46,3 +46,18 @@ Install dependencies:
 
 ```bash
 npm install
+```
+
+Create a `.env.local` file with your MongoDB connection string:
+
+```
+MONGODB_URI=your-mongodb-connection-string
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000 in your browser.
